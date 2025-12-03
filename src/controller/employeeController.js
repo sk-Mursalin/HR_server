@@ -1,7 +1,7 @@
 import Employee from "../models/employees.js";
 import User from "../models/User.js";
 import bcrypt from "bcrypt"
-import Department from "../models/Deperment.js"
+
 const addEmployee = async (req, res) => {
     try {
         const {
@@ -55,11 +55,17 @@ const getEmployees = async (req, res) => {
 
 const getEmployee = async (req, res) => {
     const { id } = req.params
-    console.log(id);
+
 
     try {
-        const employee = await Employee.findById(id).populate("userID").populate("department")
+        let employee
+        employee = await Employee.findById(id).populate("userID").populate("department")
+
+        if (!employee) {
+            employee = await Employee.findOne({ userID: id }).populate("userID").populate("department")
+        }
         return res.status(200).json({ success: true, employee })
+
     } catch (error) {
         console.log(error);
         return res.status(500).json({ success: false, error: "get employee server error" })
@@ -70,27 +76,27 @@ const updateEmployee = async (req, res) => {
     try {
         const { id } = req.params;
         const { name, department, } = req.body;
-     
 
-        const employee = await Employee.findById(id );
+
+        const employee = await Employee.findById(id);
         if (!employee) {
             return res
                 .status(404)
                 .json({ success: false, error: "employee not found" });
         }
         const userID = employee.userID
-        const user = await User.findById(userID );
+        const user = await User.findById(userID);
 
         if (!user) {
             return res
                 .status(404)
                 .json({ success: false, error: "user not found" });
         }
-         const updateUser = await User.findByIdAndUpdate(userID , {
+        const updateUser = await User.findByIdAndUpdate(userID, {
             name
         })
-        const updateEmployee = await Employee.findByIdAndUpdate(id , {
-            name,  department
+        const updateEmployee = await Employee.findByIdAndUpdate(id, {
+            name, department
         })
 
         if (!updateEmployee || !updateUser) {
@@ -109,4 +115,4 @@ const updateEmployee = async (req, res) => {
     }
 };
 
-export { addEmployee, getEmployees, getEmployee , updateEmployee }
+export { addEmployee, getEmployees, getEmployee, updateEmployee }

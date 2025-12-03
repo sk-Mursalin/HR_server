@@ -6,6 +6,7 @@ import userSeed from "./userSeed.js"
 import { authRouter } from "./routes/auth.js";
 import depRouter from "./routes/deperment.js";
 import { employeesRouter } from "./routes/employees.js";
+import leaveRouter from "./routes/leave.js";
 
 const app = express();
 dotenv.config();
@@ -15,6 +16,9 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/department", depRouter);
 app.use("/employee", employeesRouter)
+app.use("/leave", leaveRouter)
+
+
 
 databaseConnection().then(async () => {
     console.log("database connection is establish");
