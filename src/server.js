@@ -11,7 +11,10 @@ import { dashRouter } from "./routes/dashBoard.js";
 
 const app = express();
 dotenv.config();
-app.use(cors())
+app.use(cors({
+    origin:"https://hr-ui-nine.vercel.app",
+    credentials:true
+}))
 app.use(express.json());
 
 app.use("/auth", authRouter);
