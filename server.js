@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
 import dotenv from 'dotenv'
-import databaseConnection from "./config/dataBase.js";
-import userSeed from "./userSeed.js"
-import { authRouter } from "./routes/auth.js";
-import depRouter from "./routes/deperment.js";
-import { employeesRouter } from "./routes/employees.js";
-import leaveRouter from "./routes/leave.js";
-import { dashRouter } from "./routes/dashBoard.js";
+import databaseConnection from "./src/config/dataBase.js";
+import userSeed from "./src/userSeed.js"
+import { authRouter } from "./src/routes/auth.js";
+import depRouter from "./src/routes/deperment.js";
+import { employeesRouter } from "./src/routes/employees.js";
+import leaveRouter from "./src/routes/leave.js";
+import { dashRouter } from "./src/routes/dashBoard.js";
 
 const app = express();
 dotenv.config();
