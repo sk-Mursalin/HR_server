@@ -7,6 +7,7 @@ import { authRouter } from "./routes/auth.js";
 import depRouter from "./routes/deperment.js";
 import { employeesRouter } from "./routes/employees.js";
 import leaveRouter from "./routes/leave.js";
+import { dashRouter } from "./routes/dashBoard.js";
 
 const app = express();
 dotenv.config();
@@ -16,7 +17,8 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/department", depRouter);
 app.use("/employee", employeesRouter)
-app.use("/leave", leaveRouter)
+app.use("/leave", leaveRouter);
+app.use("/dashboard", dashRouter);
 
 
 
